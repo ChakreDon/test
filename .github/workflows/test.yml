@@ -16,8 +16,7 @@ jobs:
       uses: action/setup-node@v3
       with:
         node_version: "16"
-
-    steps:
+        
     - name: Installing Npm
       run: npm Install
     
