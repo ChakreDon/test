@@ -21,7 +21,7 @@ jobs:
         node_version: "16"
 
     - name: Installing Npm
-      run: npm Install
+      run: npm install
     
     - name: starting Npm
       run: npm start
