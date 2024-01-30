@@ -1,0 +1,29 @@
+name: Installing Npm
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./all_in_docker/client
+
+    - name: Set up Node.js
+      uses: action/setup-node@v3
+      with:
+        node_version: "16"
+
+    steps:
+
+    - name: Installing Npm
+      run: npm Install
+    
+    - name: starting Npm
+      run: npm start
+
+
+
