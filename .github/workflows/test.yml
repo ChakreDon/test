@@ -12,8 +12,11 @@ jobs:
       run:
         working-directory: ./all_in_docker/client
     steps:
+    - name: Checkout repository
+      uses: actions/checkouts@v2 
+
     - name: Set up Node.js
-      uses: action/setup-node@v2
+      uses: action/setup-node@v3
       with:
         node_version: "16"
 
