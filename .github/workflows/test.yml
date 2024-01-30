@@ -13,7 +13,7 @@ jobs:
         working-directory: ./all_in_docker/client
     steps:
     - name: Checkout repository
-      uses: actions/checkouts@v2 
+      uses: actions/checkout@v2 
 
     - name: Set up Node.js
       uses: action/setup-node@v3
