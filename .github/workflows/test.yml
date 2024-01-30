@@ -6,12 +6,12 @@ on:
       - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./all_in_docker/client
-
+    steps:
     - name: Set up Node.js
       uses: action/setup-node@v3
       with:
