@@ -8,9 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./all_in_docker/client
 
     steps:
     - name: Checkout Repository
@@ -29,6 +26,10 @@ jobs:
         username: ${{ secrets.REMOTE_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-            whoami
-            sudo apt update
-            sudo apt install docker.io docker-compose -y
+            cd devops-class
+            git pull origin main
+            cd all_in_docker
+            sudo docker-compose build
+            sudo docker-compose up -d backend
+            sudo docker-compose up -d frontend
+
