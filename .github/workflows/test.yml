@@ -1,6 +1,6 @@
-name: Installing Npm
+name: Transfer Build Files
 
-on: 
+on:
   push:
     branches:
       - main
@@ -11,30 +11,24 @@ jobs:
     defaults:
       run:
         working-directory: ./all_in_docker/client
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2 
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
+    - name: Setup SSH
+      uses: shimataro/ssh-key-action@v2
       with:
-        node-version: "16"
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
-    - name: Installing Npm
-      run: npm install
-
-    - name: Build Application
-      run: CI=false npm run build
-
-    - name: Transfer Build Files to Ubuntu Instance
-      uses: appleboy/scp-action@master
+    - name: executing remote ssh commands using passwordss
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source: "build"
-        target: "/tmp"
-
-
-
-
+        script: |
+            whoami
+            sudo apt update
+            sudo apt install docker.io docker-compose -y
